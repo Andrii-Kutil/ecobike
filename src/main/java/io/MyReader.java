@@ -1,6 +1,8 @@
 package io;
 
+import db.MyDatabase;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.file.Files;
@@ -31,5 +33,25 @@ public class MyReader {
             values.add(bufferedReader.readLine());
         }
         return values;
+    }
+
+    private boolean isAvailableFile(String userPath) {
+        File f = new File(userPath);
+        return f.exists();
+    }
+
+    public boolean isFillContentFromFile() throws IOException {
+        MyDatabase myDatabase = MyDatabase.getInstance();
+        try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in))) {
+            String userPath = bufferedReader.readLine();
+            if (isAvailableFile(userPath)) {
+                myDatabase.setUserPath(userPath);
+                myDatabase.getContent().addAll(readAll(userPath));
+                return true;
+            } else {
+                System.out.println("Sorry, file does not exist! Try again!");
+                return false;
+            }
+        }
     }
 }
