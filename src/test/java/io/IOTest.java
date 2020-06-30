@@ -10,6 +10,7 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
@@ -22,8 +23,6 @@ public class IOTest {
 
     @BeforeClass
     public static void createObject() throws IOException {
-        if (!Files.exists(Paths.get(PATH))) {
-            Files.createFile(Paths.get(PATH));
             List<Bike> bikes = List.of(new FoldingBike("FOLDING BIKE Maraton", 3450,
                             true, "brown", 2332, 34, 5),
                     new ElectricBike("ELECTRIC BIKE gucci", 12345, false,
@@ -34,7 +33,6 @@ public class IOTest {
             MY_DATABASE.getNewBikes().addAll(bikes);
             MY_WRITER.writeBikesFile(PATH);
         }
-    }
 
     @Test
     public void writeBikesFileOk() throws IOException {
@@ -52,7 +50,9 @@ public class IOTest {
     }
 
     @AfterClass
-    public static void deleteTestFile() throws IOException {
-        Files.delete(Paths.get(PATH));
+    public static void cleanTestFile() throws IOException {
+        PrintWriter writer = new PrintWriter(PATH);
+        writer.print("");
+        writer.close();
     }
 }
