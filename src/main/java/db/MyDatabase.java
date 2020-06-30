@@ -7,12 +7,13 @@ import model.bikes.Bike;
 
 public class MyDatabase {
     private static MyDatabase database;
-    private final List<Bike> bikes;
+    private final List<Bike> newBikes;
     private final List<String> content;
-    private List<String> searchedResult;
+    private final List<String> searchedResult;
+    private String userPath;
 
     private MyDatabase() {
-        bikes = new ArrayList<>();
+        newBikes = new ArrayList<>();
         content = new ArrayList<>();
         searchedResult = new ArrayList<>();
     }
@@ -25,31 +26,27 @@ public class MyDatabase {
     }
 
     public void addBike(Bike bike) {
-        bikes.add(bike);
+        newBikes.add(bike);
     }
 
-    public List<Bike> getBikes() {
-        return bikes;
+    public List<Bike> getNewBikes() {
+        return newBikes;
     }
 
     public List<String> getContent() {
         return content;
     }
 
-    public static MyDatabase getDatabase() {
-        return database;
-    }
-
-    public static void setDatabase(MyDatabase database) {
-        MyDatabase.database = database;
-    }
-
     public List<String> getSearchedResult() {
         return searchedResult;
     }
 
-    public void setSearchedResult(List<String> searchedResult) {
-        this.searchedResult = searchedResult;
+    public String getUserPath() {
+        return userPath;
+    }
+
+    public void setUserPath(String userPath) {
+        this.userPath = userPath;
     }
 
     @Override
@@ -61,19 +58,19 @@ public class MyDatabase {
             return false;
         }
         MyDatabase that = (MyDatabase) o;
-        return Objects.equals(bikes, that.bikes)
+        return Objects.equals(newBikes, that.newBikes)
                 && Objects.equals(content, that.content);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(bikes, content);
+        return Objects.hash(newBikes, content);
     }
 
     @Override
     public String toString() {
         return "MyDatabase{"
-                + "bikes=" + bikes
+                + "bikes=" + newBikes
                 + ", content=" + content
                 + '}';
     }
