@@ -27,8 +27,19 @@ public class BikeTest {
     }
 
     @Test
+    public void getBikeDataBaseNotValid() {
+        Assert.assertNotEquals(0, bike.getDataBaseType()
+                .split("; ").length);
+    }
+
+    @Test
     public void getFoldingBikeDataBaseTypeOk() {
         Assert.assertEquals(7, foldingBike.getDataBaseType().split("; ").length);
+    }
+
+    @Test
+    public void getFoldingBikeDataBaseTypeNotValid() {
+        Assert.assertNotEquals(8, foldingBike.getDataBaseType().split("; ").length);
     }
 
     @Test
@@ -37,7 +48,18 @@ public class BikeTest {
     }
 
     @Test
+    public void getElectricBikeDataBaseTypeNotValid() {
+        Assert.assertNotEquals(10, electricBike.getDataBaseType().split("; ").length);
+    }
+
+    @Test
     public void getSpeedelecDataBaseTypeOk() {
-        Assert.assertEquals(7, speedelec.getDataBaseType().split("; ").length);
+        Assert.assertEquals(7, speedelec.getDataBaseType()
+                .split("; ").length);
+    }
+
+    @Test
+    public void getSpeedelecDataBaseTypeNotValid() {
+        Assert.assertNotEquals(10, speedelec.getDataBaseType().split("; ").length);
     }
 }
