@@ -42,16 +42,15 @@ public class MyReader {
 
     public boolean isFillContentFromFile() throws IOException {
         MyDatabase myDatabase = MyDatabase.getInstance();
-        try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in))) {
-            String userPath = bufferedReader.readLine();
-            if (isAvailableFile(userPath)) {
-                myDatabase.setUserPath(userPath);
-                myDatabase.getContent().addAll(readAll(userPath));
-                return true;
-            } else {
-                System.out.println("Sorry, file does not exist! Try again!");
-                return false;
-            }
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+        String userPath = bufferedReader.readLine();
+        if (isAvailableFile(userPath)) {
+            myDatabase.setUserPath(userPath);
+            myDatabase.getContent().addAll(readAll(userPath));
+            return true;
+        } else {
+            System.out.println("Sorry, file does not exist! Try again!");
+            return false;
         }
     }
 }
